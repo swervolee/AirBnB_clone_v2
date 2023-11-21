@@ -6,6 +6,7 @@ import models
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime
 
+Base = declarative_base()
 
 class BaseModel:
     """A base class for all hbnb models"""

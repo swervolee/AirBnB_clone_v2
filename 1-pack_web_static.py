@@ -9,9 +9,10 @@ def do_pack():
     try:
         if not os.path.exists('versions'):
             local('mkdir versions')
-        local("tar -czvf versions/web_static_{}.tgz ./web_static/*".
+        local("tar -czvf versions/web_static_{}.tgz /web_static/".
               format(datetime.now().strftime('%Y%m%d%H%M%S')))
 
     except Exception:
         return None
-    return ("web_static_{}".format(datetime.now().strftime('%Y%m%d%H%M%S')))
+    return ("web_static_{}.tgz".
+            format(datetime.now().strftime('%Y%m%d%H%M%S')))

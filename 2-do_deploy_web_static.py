@@ -28,25 +28,44 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    """
-        Distribute archive.
-    """
-    if os.path.exists(archive_path):
-        archived_file = archive_path[9:]
-        newest_version = "/data/web_static/releases/" + archived_file[:-4]
-        archived_file = "/tmp/" + archived_file
+    """Distribute archive."""
+    if not os.path.exists(archive_path):
+        return False
+
+    try:
+        # Extracting information from the archive path
+        archive_filename = os.path.basename(archive_path)
+        version_folder = "/data/web_static/releases/{}".
+        format(archive_filename[:-4])
+
+        # Upload the archive to the /tmp/ directory of the web server
         put(archive_path, "/tmp/")
-        run("sudo mkdir -p {}".format(newest_version))
-        run("sudo tar -xzf {} -C {}/".format(archived_file,
-                                             newest_version))
-        run("sudo rm {}".format(archived_file))
-        run("sudo mv {}/web_static/* {}".format(newest_version,
-                                                newest_version))
-        run("sudo rm -rf {}/web_static".format(newest_version))
+
+        # Uncompress the archive to the folder
+        # /data/web_static/releases/<archive filename without extension>
+
+        run("sudo mkdir -p {}".format(version_folder))
+        run("sudo tar -xzvf /tmp/{} -C {}/".
+            format(archive_filename, version_folder))
+
+        # Delete the archive from the web server
+        run("sudo rm /tmp/{}".format(archive_filename))
+
+        # Move the contents to the version folder
+        run("sudo mv {}/web_static/* {}".
+            format(version_folder, version_folder))
+
+        # Remove the web_static folder
+        run("sudo rm -rf {}/web_static".format(version_folder))
+
+        # Remove the symbolic link /data/web_static/current
         run("sudo rm -rf /data/web_static/current")
-        run("sudo ln -s {} /data/web_static/current".format(newest_version))
+
+        # Create a new symbolic link
+        run("sudo ln -s {} /data/web_static/current".format(version_folder))
 
         print("New version deployed!")
         return True
 
-    return False
+    except Exception as e:
+        return False

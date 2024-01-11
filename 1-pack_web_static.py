@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"creates tar from web_static files"
+"""creates tar from web_static files and stores
+it in the folder versions
+"""
 from fabric.api import *
 from datetime import datetime
 import os

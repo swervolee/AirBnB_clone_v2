@@ -35,8 +35,8 @@ def do_deploy(archive_path):
     try:
         # Extracting information from the archive path
         archive_filename = os.path.basename(archive_path)
-        version_folder = "/data/web_static/releases/{}".
-        format(archive_filename[:-4])
+        version_folder = "/data/web_static/releases/{}".format(
+            archive_filename[:-4])
 
         # Upload the archive to the /tmp/ directory of the web server
         put(archive_path, "/tmp/")

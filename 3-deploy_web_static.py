@@ -75,6 +75,6 @@ def deploy():
     """deploys tar archive to servers"""
 
     path_to_file = do_pack()
-    if path_to_file:
-        return do_deploy(path_to_file)
-    return False
+    if path_to_file == None:
+        return False
+    return do_deploy(path_to_file)

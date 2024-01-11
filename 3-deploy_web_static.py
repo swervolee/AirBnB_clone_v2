@@ -72,9 +72,9 @@ def do_deploy(archive_path):
 
 
 def deploy():
-    """deploys tar to servers"""
-    try:
-        path_to_file = do_pack()
+    """deploys tar archive to servers"""
+
+    path_to_file = do_pack()
+    if path_to_file:
         return do_deploy(path_to_file)
-    except Exception:
-        return False
+    return False

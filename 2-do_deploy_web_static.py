@@ -52,7 +52,7 @@ def do_deploy(archive_path):
         run("sudo rm /tmp/{}".format(archive_filename))
 
         # Move the contents to the version folder
-        run("sudo mv {}/web_static/* {}".
+        run("sudo mv -f {}/web_static/* {}".
             format(version_folder, version_folder))
 
         # Remove the web_static folder

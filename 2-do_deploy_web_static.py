@@ -35,7 +35,7 @@ def do_deploy(archive_path):
     try:
         # Extracting information from the archive path
         archive_filename = os.path.basename(archive_path)
-        version_folder = "/data/web_static/releases/{}".format(
+        version_folder = "/data/web_static/releases/{}/".format(
             archive_filename[:-4])
 
         # Upload the archive to the /tmp/ directory of the web server
@@ -45,7 +45,7 @@ def do_deploy(archive_path):
         # /data/web_static/releases/<archive filename without extension>
 
         run("sudo mkdir -p {}".format(version_folder))
-        run("sudo tar -xzvf /tmp/{} -C {}/".
+        run("sudo tar -xzf /tmp/{} -C {}/".
             format(archive_filename, version_folder))
 
         # Delete the archive from the web server

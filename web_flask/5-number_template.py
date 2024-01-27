@@ -2,7 +2,7 @@
 """
 Flask app
 """
-from flask import Flask
+from flask import Flask, abort, render_template
 
 
 app = Flask(__name__)
@@ -39,8 +39,22 @@ def snake(text='is cool'):
 @app.route("/number/<n>", strict_slashes=False)
 def integer_html(n):
     """number inspection"""
-    if isinstance(n, int):
-        return f"{n} is a number"
+    try:
+        if '.' not in n:
+            n = int(n)
+            return f"{n} is a number"
+        else:
+            raise TypeError
+    except Exception:
+        abort(404)
+
+
+@app.route("/number_template/<n>", strict_slashes=False)
+def number_template(n):
+    """html rendering"""
+    integer_html(n)
+    n = int(n)
+    return render_template("5-number.html", n=n)
 
 
 if __name__ == '__main__':

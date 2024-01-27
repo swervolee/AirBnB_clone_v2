@@ -28,10 +28,19 @@ def c_fun(text):
     return f'C {text.replace("_", " ")}'
 
 
-@app.route("/python/<text>")
-def snake(text):
+@app.route("/python/<text>", strict_slashes=False)
+@app.route("/python", strict_slashes=False)
+@app.route("/python/", strict_slashes=False)
+def snake(text='is cool'):
     """python route"""
     return f"Python {text.replace('_', ' ')}"
+
+
+@app.route("/number/<n>", strict_slashes=False)
+def integer_html(n):
+    """number inspection"""
+    if isinstance(n, int):
+        return f"{n} is a number"
 
 
 if __name__ == '__main__':

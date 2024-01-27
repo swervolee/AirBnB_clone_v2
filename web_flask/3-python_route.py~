@@ -28,10 +28,8 @@ def c_fun(text):
     return f'C {text.replace("_", " ")}'
 
 
-@app.route("/python/<text>", strict_slashes=False)
-@app.route("/python", strict_slashes=False)
-@app.route("/python/", strict_slashes=False)
-def snake(text='is cool'):
+@app.route("/python/<text>")
+def snake(text):
     """python route"""
     return f"Python {text.replace('_', ' ')}"
 

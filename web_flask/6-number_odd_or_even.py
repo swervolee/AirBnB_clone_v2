@@ -62,8 +62,8 @@ def odd_or_even(n):
     """Tells if number is odd or even"""
     integer_html(n)
     n = int(n)
-    return render_template("6-number_odd_or_even.html", n)
+    return render_template("6-number_odd_or_even.html", n=n)
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)

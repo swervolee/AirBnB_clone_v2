@@ -1,1 +1,11 @@
-{% extends 5-number.html %}
+{% extends "5-number.html" -%}
+{% block content -%}
+
+{% if n is divisibleby 2 -%}
+<H1>Number: {{ n }} is even</H1>
+{% endif -%}
+
+{% if n is not divisibleby 2 -%}
+<H1>Number: {{n }} is odd</H1>
+{% endif -%}
+{% endblock %}

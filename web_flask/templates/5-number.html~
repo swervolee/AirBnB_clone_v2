@@ -4,8 +4,6 @@
         <TITLE>HBNB</TITLE>
     </HEAD>
     <BODY>
-      {% block content -%}
-      <H1>Number: {{ n }}</H1>
-      {% endblock -%}
+        <H1>Number: {{ n }}</H1>
     </BODY>
 </HTML>

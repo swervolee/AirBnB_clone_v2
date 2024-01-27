@@ -16,10 +16,16 @@ def hello():
     return "Hello HBNB!"
 
 
-@app.route("/hbnb", strict_slashes=False):
+@app.route("/hbnb", strict_slashes=False)
 def hbnb():
     """app test"""
     return "HBNB"
+
+
+@app.route("/c/<text>", strict_slashes=False)
+def c_fun(text):
+    "c text"
+    return text.replace("_", " ")
 
 
 if __name__ == '__main__':

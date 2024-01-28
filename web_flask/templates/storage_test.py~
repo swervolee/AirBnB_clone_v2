@@ -1,0 +1,9 @@
+#!/usr/bin/python3
+
+from models import storage
+
+
+a = models.storage.all(State)
+
+for i in a:
+    print(a)

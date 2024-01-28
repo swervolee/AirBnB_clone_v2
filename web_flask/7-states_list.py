@@ -13,13 +13,16 @@ app.url_map.strict_slashes = False
 
 @app.teardown_appcontext
 def close(cmd):
+    """Closes a session"""
     storage.close()
 
 
 @app.route("/states_list")
 def state_list():
+    """lists states in the database"""
     states = storage.all(State).values()
     return render_template("7-states_list.html", states=states)
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)

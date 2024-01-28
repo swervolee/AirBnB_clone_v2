@@ -18,24 +18,23 @@ def close_db(exc):
     storage.close()
 
 
-@app.route('/states/<id>')
-@app.route('/states')
-def cities_by_states(id=None):
-    """
-    Displays an HTML page with a list of all State objects in DBStorage
-    and its cities.States are sorted by name.
-    """
-    found = False
-    state = storage.all(State)
+@app.route("/states")
+def states():
+    """Displays an HTML page with a list of all States.
 
-    if id:
-        for st in state.values():
-            for city in st.cities:
-                if city.id == id:
-                    return render_template("9-states.html", state=state.values())
-    if id:
-        return render_template("9-states.html")
-    return render_template("9-states.html", state=state)
+    States are sorted by name.
+    """
+    states = storage.all(State)
+    return render_template("9-states.html", state=states)
+
+
+@app.route("/states/<id>")
+def states_id(id):
+    """Displays an HTML page with info about <id>, if it exists."""
+    for state in storage.all(State).values():
+        if state.id == id:
+            return render_template("9-states.html", state=state)
+    return render_template("9-states.html")
 
 
 if __name__ == "__main__":

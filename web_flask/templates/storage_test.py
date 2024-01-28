@@ -8,4 +8,4 @@ a = storage.all(State).values()
 for i in a:
     print(i.name)
     for j in i.cities:
-        print(f"\t{j.name}")
+        print(f"\t{j.name}: {j.id}")

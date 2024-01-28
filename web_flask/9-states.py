@@ -26,17 +26,16 @@ def cities_by_states(id=None):
     and its cities.States are sorted by name.
     """
     found = False
-    states = storage.all(State).values()
+    state = storage.all(State)
 
     if id:
-        for state in states:
-            for city in state.cities:
+        for st in state.values():
+            for city in st.cities:
                 if city.id == id:
-                    return render_template("9-states.html",
-                                           city=city, state=state)
+                    return render_template("9-states.html", state=state.values())
     if id:
-        return render_template("9-states.html", search="Not_Found")
-    return render_template("9-states.html", states=states, city=None)
+        return render_template("9-states.html")
+    return render_template("9-states.html", state=state)
 
 
 if __name__ == "__main__":
